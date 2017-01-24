@@ -5,7 +5,7 @@ class PasteFetcher():
     def __init__(self):
         self.URL = "http://pastebin.com/{}"
 
-    def getArchive(self):
+    def get_archive(self):
         pastes = []
         plainArchive = requests.get(self.URL.format("archive")).text
         soup = BeautifulSoup(plainArchive, "html.parser")
@@ -16,15 +16,15 @@ class PasteFetcher():
                 pass
         return pastes    
 
-    def pasteParser(self, pasteID = "pfcWEYiL"):
+    def paste_parser(self, pasteID = "pfcWEYiL"):
         plainPaste = requests.get(self.URL.format(pasteID)).text
         soup = BeautifulSoup(plainPaste, "html.parser")
         fullPaste = soup.find("textarea")
         parsed = fullPaste.string
         return parsed
 
-    def randomPaste(self):
-        pastes = self.getArchive()
-        pastedID = random.choice(pastes)
-        final = self.pasteParser(pasteID)
+    def random_paste(self):
+        pastes = self.get_archive()
+        pasteID = random.choice(pastes)
+        final = self.paste_parser(pasteID)
         return final 
